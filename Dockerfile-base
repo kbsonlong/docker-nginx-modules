@@ -17,7 +17,7 @@ RUN cd /usr/src && \
     CONFARGS=${CONFARGS/-Os -fomit-frame-pointer -g/-Os} && \
     echo $CONFARGS && \
     ./configure --with-compat $CONFARGS --add-dynamic-module=../${MODULE_NAME}/ && \
-    make && make install && make modules && ls -l /usr/src/nginx/objs
+    make -j $(nproc) && make install && make modules && ls -l /usr/src/nginx/objs
     
 FROM scratch
 
